@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<form action="" method="get">
+		<label>Имя: <input id="name" name="name" placeholder="введите ваше имя"></label>
+		<label>E-mail: <input type="email" name="email" value="no@email.com" ></label>
+		<label>Пароль: <input type="password" name="password" ></label>
+		<label>Возраст: <input type="number" min="1" max="10" step="2"></label>
+		<label>Дата рождения: <input type="date" name="dob"></label>
+		<label class="checkbox"><input type="checkbox" name="notifications" checked> Получать уведомления</label>
+		<label class="checkbox"><input type="radio" name="period" value="1" checked> каждый день</label>
+		<label class="checkbox"><input type="radio" name="period" value="2"> раз в неделю</label>
+		<label class="checkbox"><input type="radio" name="period" value="3"> раз в месяц</label>
+
+		<label>
+			Ваш город:
+			<select name="city" required>
+				<option></option>
+				<option value="1">Днепр</option>
+				<option value="2" selected>Киев</option>
+				<option value="3">Харьков</option>
+			</select>
+		</label>
+
+		<label class="textarea">
+			О себе:
+			<textarea name="about"></textarea>
+		</label>
+
+		<input type="button" value="Просто кнопка">
+		<input type="submit" value="Отправить">
+		<button type="button">Button</button>
+		<button type="submit">Submit</button>
+		<input type="reset">
+	</form>
+
+</body>
+</html>
