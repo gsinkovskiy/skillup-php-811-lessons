@@ -1,23 +1,34 @@
 <?php
 
-$a = 1;
-$b = 1;
+require 'functions.php';
 
-echo '<br>';
+$values = [
+	'name' => '',
+	'email' => '',
+	'password' => '',
+	'subscribe' => 0,
+];
+$userAdded = false;
 
-echo 'A: ' . $a++ . '<br>';
-// echo 'A: ' . $a . '<br>'; $a = $a + 1;
+if (isset($_POST['name'])) {
+	$errors = [];
 
+	checkEmpty('name', 'Введите имя');
+	checkEmpty('email', 'Введите email');
+	checkEmpty('password', 'Введите пароль');
 
-echo 'B: ' . ++$b . '<br>';
-// $b = $b + 1; echo 'B: ' . $b . '<br>';
+	if (empty($errors['email']) && strpos($values['email'], '@') === false) {
+		$errors['email'] = 'Email должен содержать @';
+	}
 
-echo '======= после инкремента =======<br>';
+	if (!empty($_POST['subscribe'])) {
+		$values['subscribe'] = 1;
+	}
 
-echo 'A: ' . $a . '<br>';
-echo 'B: ' . $b . '<br>';
+	if (!$errors) {
+		saveUser($values);
+		$userAdded = true;
+	}
+}
 
-$b = $b + 3;
-$b += 3;
-
-
+include 'form.html.php';
