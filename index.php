@@ -1,34 +1,43 @@
 <?php
 
-require 'functions.php';
+use Data\User;
+use Data\Worker as Work;
 
-$values = [
-	'name' => '',
-	'email' => '',
-	'password' => '',
-	'subscribe' => 0,
-];
-$userAdded = false;
+header('Content-Type: text/plain; charset=utf-8');
 
-if (isset($_POST['name'])) {
-	$errors = [];
-
-	checkEmpty('name', 'Введите имя');
-	checkEmpty('email', 'Введите email');
-	checkEmpty('password', 'Введите пароль');
-
-	if (empty($errors['email']) && strpos($values['email'], '@') === false) {
-		$errors['email'] = 'Email должен содержать @';
-	}
-
-	if (!empty($_POST['subscribe'])) {
-		$values['subscribe'] = 1;
-	}
-
-	if (!$errors) {
-		saveUser($values);
-		$userAdded = true;
-	}
+function classLoader($class) {
+	$class = substr($class, 5);
+	$filename = __DIR__ . '/classes/' . $class . '.php';
+	require $filename;
 }
 
-include 'form.html.php';
+spl_autoload_register('classLoader');
+
+$user = new User('Коля', new DateTime('1997-03-08'));
+$user2 = new User('Вася', new DateTime('1994-08-20'));
+
+echo 'Имя: ' . $user->getName() . "\n";
+echo 'Возраст: ' . $user->getAge() . "\n";
+echo $user->aboutMe() . "\n";
+
+echo 'Имя2: ' . $user2->getName() . "\n";
+echo 'Возраст2: ' . $user2->getAge() . "\n";
+echo $user2->aboutMe() . "\n";
+
+$user3 = new User();
+echo 'Имя3: ' . $user3->getName() . "\n";
+echo 'Возраст3: ' . $user3->getAge() . "\n";
+echo $user3->aboutMe() . "\n";
+
+$worker1 = new Work('Иван', new DateTime('1996-07-11'));
+$worker1->setSalary(10000)->setName('Сергей');
+echo 'Имя w1: ' . $worker1->getName() . "\n";
+echo 'Возраст w1: ' . $worker1->getAge() . "\n";
+echo $worker1->aboutMe() . "\n";
+
+echo Work::whoAmI();
+Work::$temp = 'test';
+
+echo Work::$temp;
+
+$worker1->setDepartment(Work::DEPARTMENT_DEVS);
