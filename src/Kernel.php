@@ -14,6 +14,7 @@ class Kernel
 	{
 		header('Content-Type: text/plain');
 
+		/*
 		if (empty($_COOKIE['visits'])) {
 			$_COOKIE['visits'] = 0;
 		}
@@ -22,6 +23,17 @@ class Kernel
 
 		setcookie('visits', $_COOKIE['visits'], strtotime('+1 month'));
 		echo 'Вы открыли страницу: ' . $_COOKIE['visits'] . ' раз';
+		*/
+
+		session_start();
+
+		if (empty($_SESSION['visits'])) {
+			$_SESSION['visits'] = 0;
+		}
+
+		$_SESSION['visits']++;
+
+		echo 'Вы открыли страницу: ' . $_SESSION['visits'] . ' раз';
 	}
 
 }
