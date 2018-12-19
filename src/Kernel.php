@@ -13,17 +13,15 @@ class Kernel
 	public function run()
 	{
 		header('Content-Type: text/plain');
-		//$mailer = new Mailer();
-		//$mailer->send('gleb@itworks-soft.com');
 
-		$database = new Database();
-		$files = new File();
+		if (empty($_COOKIE['visits'])) {
+			$_COOKIE['visits'] = 0;
+		}
 
-		$databaseSaver = new Saver($database);
-		$filesSaver = new Saver($files);
+		$_COOKIE['visits']++;
 
-		$databaseSaver->doIt();
-		$filesSaver->doIt();
+		setcookie('visits', $_COOKIE['visits'], strtotime('+1 month'));
+		echo 'Вы открыли страницу: ' . $_COOKIE['visits'] . ' раз';
 	}
 
 }
