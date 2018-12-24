@@ -5,6 +5,8 @@ ini_set('display_errors', 1);
 
 define('DATA_FILE_NAME', 'users.txt');
 
+$db = new PDO('mysql:host=localhost;dbname=test', 'root', 'root');
+
 function checkEmpty($fieldName, $errorMessage) {
 	global $values, $errors;
 
@@ -16,7 +18,14 @@ function checkEmpty($fieldName, $errorMessage) {
 }
 
 function saveUser($values) {
-	$file = fopen(DATA_FILE_NAME, 'a');
-	fputs($file, implode("\t", $values) . "\n");
-	fclose($file);
+	global $db;
+
+	$sql = 'INSERT INTO users (name, email, password) 
+			VALUES (:name, :email, :password)';
+	$query = $db->prepare($sql);
+	$query->execute([
+		'name' => $values['name'],
+		'email' => $values['email'],
+		'password' => $values['password']
+	]);
 }
