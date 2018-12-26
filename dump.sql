@@ -26,7 +26,7 @@ CREATE TABLE `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES (1,'пользователи'),(2,'админы');
+INSERT INTO `groups` VALUES (1,'пользователи'),(2,'админы'),(3,'не пойми кто');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`),
   KEY `users_groups_id_fk` (`group_id`),
   CONSTRAINT `users_groups_id_fk` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'gleb.sinkovskiy@gmail.com','test','Глеб',NULL,1),(2,'test@test.com','passw','Tester',NULL,1),(3,'tester@test.com','new password','Tester with new pass','1990-04-05 00:00:00',1),(5,'tester3@test.com','passw','Tester 3','1990-04-05 00:00:00',2),(6,'tester4@test.com','passw','Tester 4','1990-04-06 00:00:00',2);
+INSERT INTO `users` VALUES (1,'gleb.sinkovskiy@gmail.com','test','Глеб',NULL,1),(3,'tester@test.com','new password','Tester with new pass','1990-04-05 00:00:00',1),(5,'tester3@test.com','passw','Tester 3','1990-04-05 00:00:00',2),(6,'tester4@test.com','passw','Tester 4','1990-04-06 00:00:00',2),(8,'test@glebs.dallas.intechnic.com','test','Testyy Tester',NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -79,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-24 21:01:43
+-- Dump completed on 2018-12-26 20:54:23

@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 define('DATA_FILE_NAME', 'users.txt');
 
-$db = new PDO('mysql:host=localhost;dbname=test', 'root', 'root');
+$db = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', 'root');
 
 function checkEmpty($fieldName, $errorMessage) {
 	global $values, $errors;
